@@ -31,3 +31,10 @@ $ docker exec reverse-proxy nginx -t reload
 
 - allow the load balancer to access the instance.
 - allow the user IP to access the load balancer.
+
+## Create BasicAuth password
+
+```bash
+$ apt-get install apache2-utils -y
+$ htpasswd -c /etc/nginx/.htpasswd {username}
+```
