@@ -37,3 +37,23 @@ apt-get install -y docker.io net-tools iproute2
 service docker restart
 
 
+# run service
+apt-get install apache2-utils -y
+
+docker network create proxy
+
+mkdir -p /etc/nginx/conf.d
+docker run -d --restart always --name reverse-proxy \
+    --network proxy \
+    -v /etc/nginx/conf.d:/etc/nginx/conf.d \
+    -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
+    -v /etc/nginx/.htpasswd:/etc/nginx/.htpasswd:ro \
+    -p 9127:9127 \
+    nginx:latest
+
+docker run -d --restart always --name es-proxy \
+    --network proxy \
+    -p 9200:9200 \
+    abutaha/aws-es-proxy:v1.5 \
+    -endpoint https://{elasticsearch-endpoint} \
+    -listen 0.0.0.0:9200
