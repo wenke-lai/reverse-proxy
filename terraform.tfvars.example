@@ -1,0 +1,10 @@
+# VPC
+vpc_id = "vpc-00000000000000000"
+subnet_id = "subnet-00000000000000000"
+security_group_id = "sg-00000000000000000"
+
+# Load Balancer
+lb_name = "load-balancer-name"
+
+# IAM
+iam_role_name = "iam-role-name"
